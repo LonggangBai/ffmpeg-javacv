@@ -80,8 +80,8 @@ public class JavaCV2FrameRecorderTest {
      * @throws org.bytedeco.javacv.FrameRecorder.Exception
      */
     public static void main(String[] args) throws Exception, InterruptedException, org.bytedeco.javacv.FrameRecorder.Exception {
-        recordCamera("rtmp://192.168.30.21/live/record1",25);
-//        recordCamera("output.mp4",25);
+//        recordCamera("rtmp://192.168.31.47:1935/stream/test345",25);
+        recordCamera("E://tmp//1.flv",25);
     }
 
 }
