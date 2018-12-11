@@ -42,7 +42,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-
+        <!-- gif -->
+        <dependency>
+            <groupId>com.madgag</groupId>
+            <artifactId>animated-gif-lib</artifactId>
+            <version>1.4</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
         <dependency>
             <groupId>io.netty</groupId>
