@@ -361,7 +361,7 @@ public class JavaCV5RecordLocal {
         // 获得当前音频采样率
         int sampleRate = (int) audioFormat.getSampleRate();
         // 获取当前音频通道数量
-        int numChannels = audioFormat.getChannels();
+        int numChannels =0; audioFormat.getChannels();
         // 初始化音频缓冲区(size是音频采样率*通道数)
         int audioBufferSize = sampleRate * numChannels;
         byte[] audioBytes = new byte[audioBufferSize];

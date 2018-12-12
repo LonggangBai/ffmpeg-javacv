@@ -39,9 +39,9 @@ public abstract class FrameGrabberKit {
 
     public static void main(String[] args) throws Exception {
 
-//    randomGrabberFFmpegImage("e:/ffmpeg/aa.mp4", "./target", "screenshot", 5);
+    randomGrabberFFmpegImage("e://tmp/1.flv", "e://tmp/3.flv", "screenshot", 5);
 
-        randomGrabberFFmpegImage("e:/ffmpeg/ffmpeg.mp4", "./target", "screenshot", 5);
+//        randomGrabberFFmpegImage("e:/ffmpeg/ffmpeg.mp4", "./target", "screenshot", 5);
 
     }
 
@@ -51,7 +51,6 @@ public abstract class FrameGrabberKit {
             throws Exception {
 
         FFmpegFrameGrabber ff = FFmpegFrameGrabber.createDefault(filePath);
-
         ff.start();
 
         String rotate = ff.getVideoMetadata("rotate");
