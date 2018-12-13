@@ -1,4 +1,4 @@
-package com.ewivt.bjss.ccs;
+package com.easy.ffmpeg;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;

@@ -17,6 +17,60 @@ import org.bytedeco.javacv.FrameRecorder.Exception;
 
 /**
  * <pre>
+ *     java音视频编解码问题：16/24/32位位音频byte[]转换为小端序short[],int[]，以byte[]转short[]为例
+ * 2016年10月11日 19:42:29 eguid 阅读数：3741更多
+ * 个人分类： java
+ * 所属专栏： java流媒体技术 javacv开发指南（音视频/图像处理从入门到精通）
+ * 版权声明：eguid温馨提示：本博客所有原创文章均采用知识共享署名-相同方式共享 3.0 中国大陆许可协议进行许可。如有转载请注明出处和eguid作者名，侵权必究！	https://blog.csdn.net/eguid_1/article/details/52790848
+ * 前言：Java默认采用大端序存储方式，实际编码的音频数据是小端序，如果处理单8bit的音频当然不需要做转换，但是如果是16bit或者以上的就需要处理成小端序字节顺序。
+ *
+ * 注：大、小端序指的是字节的存储顺序是按从高到低还是从低到高的顺序存储，与处理器架构有关，Intel的x86平台是典型的小端序存储方式
+ *
+ * 1、Java中使用ByteOrder.LITTLE_ENDIAN表示小端序，ByteOrder.BIG_ENDIAN表示大端序
+ * 小端序：数据的高位字节存放在地址的低端 低位字节存放在地址高端
+ *
+ * 大端序：数据的高位字节存放在地址的高端 低位字节存放在地址低端
+ *
+ * 大端序是按照数字的书写顺序进行存储的，而小端序则是反顺序进行存储的。
+ *
+ * Big-endian 存放顺序(顺序存储)
+ * 0x00000001           -- 12
+ * 0x00000002           -- 34
+ * 0x00000003           -- 56
+ * 0x00000004           -- 78
+ *
+ * Little-endian 存放顺序(反序储存)
+ * 0x00000001           -- 78
+ * 0x00000002           -- 56
+ * 0x00000003           -- 34
+ * 0x00000004           -- 12
+ *
+ * 2、java中的大小端序转换
+ * 例如byte[]转成short[]：
+ *
+ * 假设data作为源音频数据，是一个byte[]
+ *
+ * int dataLength=data.length;
+ *
+ * //byte[]转成short[]，数组长度缩减一半
+ *
+ * int shortLength=dataLength/2;
+ *
+ * //把byte[]数组装进byteBuffer缓冲
+ *
+ * ByteBuffer byteBuffer=ByteBuffer.wrap(data, 0,dataLength);
+ *
+ * //将byteBuffer转成小端序并获取shortBuffer
+ *
+ * ShortBuffer shortBuffer=byteBuffer.order(ByteOrder.LITTLE_ENDIAN).asShortBuffer();
+ *
+ * short[] shortSamples=new short[shortLength];
+ *
+ * //取出shortBuffer中的short数组
+ *
+ * shortBuffer.get(shortSamples,0,shortLength);
+ *
+ *
  *
  *     javaCV开发详解之7：让音频转换更加简单，实现通用音频编码格式转换、重采样等音频参数的转换功能（以pcm16le编码的wav转mp3为例）
  *     实现功能：
